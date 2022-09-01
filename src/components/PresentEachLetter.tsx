@@ -1,12 +1,12 @@
 import { LetterWithColour } from "../utils/wordle-guess-interface";
 
-export function ResultPresenter({
+export function PresentEachLetter({
   letter,
   colour,
 }: LetterWithColour): JSX.Element {
   return (
-    <div className="guessDisplay">
-      <h1 style={{ backgroundColor: colour }}>{letter}</h1>
+    <div className="letter" style={{ backgroundColor: colour }}>
+      <h1>{letter}</h1>
     </div>
   );
 }

@@ -1,34 +1,65 @@
 import { useState } from "react";
-import { ResultPresenter } from "./components/ResultPresenter";
-import markWordle from "./utils/mark-wordle";
-import { LetterWithColour, MarkedGuess } from "./utils/wordle-guess-interface";
+import { PresentEachGuess } from "./components/PresentEachGuess";
+import { handleSubmitButton } from "./utils/handleSubmitButton";
 
 function App(): JSX.Element {
-  const [guess, setGuess] = useState<string>("");
+  const [guessInput, setGuessInput] = useState<string>("");
+  const [allGuesses, setAllGuesses] = useState<string[]>([]);
+  const [solvedStatus, setSolvedStatus] = useState<boolean>(false);
   const solution = "eumel";
-  const result: MarkedGuess = markWordle(guess, solution);
-  const resultAsArray: LetterWithColour[] = [];
-  for (let i = 0; i < 5; i++) {
-    resultAsArray.push(result[i]);
-  }
+
   return (
     <>
-      <input
-        maxLength={5}
-        type="text"
-        value={guess}
-        onChange={(e) => setGuess(e.target.value)}
-        placeholder="type Wordle guess"
-      />
-      <body className="allGuesses">
-        {resultAsArray.map((element: LetterWithColour, i: number) => (
-          <ResultPresenter
+      <div className="topHalf">
+        {solvedStatus === false ? (
+          <>
+            {allGuesses.length < 6 ? (
+              <div className="inputFields">
+                <input
+                  className="textInput"
+                  maxLength={5}
+                  type="text"
+                  value={guessInput}
+                  onChange={(e) => {
+                    setGuessInput(e.target.value);
+                  }}
+                  placeholder="type Wordle guess"
+                />
+                <button
+                  className="submitButton"
+                  onClick={() => {
+                    handleSubmitButton(
+                      guessInput,
+                      setGuessInput,
+                      allGuesses,
+                      setAllGuesses
+                    );
+                  }}
+                >
+                  Submit
+                </button>
+              </div>
+            ) : (
+              <h1 className="solutionMessage">
+                Too bad, loser! The solution was: {solution}
+              </h1>
+            )}{" "}
+          </>
+        ) : (
+          <h1 className="solutionMessage">Congratulations!</h1>
+        )}
+      </div>
+
+      <main className="guessDisplay">
+        {allGuesses.map((guess: string, i: number) => (
+          <PresentEachGuess
             key={i}
-            letter={element.letter}
-            colour={element.colour}
+            guess={guess}
+            solution={solution}
+            setSolvedStatus={setSolvedStatus}
           />
         ))}
-      </body>
+      </main>
     </>
   );
 }
