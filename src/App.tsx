@@ -6,7 +6,7 @@ function App(): JSX.Element {
   return (
     <>
       {!guessing && <button onClick={() => setGuessing(true)}>Play</button>}
-      {guessing && <PlayWordle setGuessing={setGuessing} />}
+      {<PlayWordle setGuessing={setGuessing} />}
     </>
   );
 }

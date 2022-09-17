@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { handleSubmitButton } from "../utils/handleSubmitButton";
 import { MarkedGuess } from "../utils/interfaces";
+import { Keyboard } from "./Keyboard";
 import { ShowAllResults } from "./ShowAllResults";
 
 interface PropsGuessInterface {
@@ -31,7 +32,7 @@ export function GuessInterface({
                 type="text"
                 value={guessInput}
                 onChange={(e) => {
-                  setGuessInput(e.target.value);
+                  setGuessInput(e.target.value.toUpperCase());
                 }}
                 placeholder="type Wordle guess"
               />
@@ -64,7 +65,18 @@ export function GuessInterface({
       </div>
 
       <div className="guessDisplay">
-        <ShowAllResults allResults={allResults} />
+        <ShowAllResults allResults={allResults} guessInput={guessInput} />
+      </div>
+
+      <div className="keyboard">
+        <Keyboard
+          guessInput={guessInput}
+          setGuessInput={setGuessInput}
+          allResults={allResults}
+          setAllResults={setAllResults}
+          todaysSolution={todaysSolution}
+          setSolvedStatus={setSolvedStatus}
+        />
       </div>
     </>
   );
