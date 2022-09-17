@@ -1,7 +1,7 @@
 /*Write a function, `markWordleGuess(guess: string, hiddenTarget: string):MarkedGuess` 
 which calculates the correctness hints for each letter of a given single guess in Wordle based on the given hidden target.
 Assume that the strings guess and hiddenTarget are always formed of exactly 5 upper-case alphabet characters (often with repeats).*/
-import { MarkedGuess } from "./interfaces";
+import { green, grey, MarkedGuess, yellow } from "./interfaces";
 
 /**
  * returns a marked wordle guess
@@ -26,16 +26,16 @@ function markIgnoringRepetition(
   guess: string,
   hiddenTarget: string
 ): MarkedGuess {
-  const result: MarkedGuess = { 0: { letter: guess[0], colour: "grey" } };
+  const result: MarkedGuess = { 0: { letter: guess[0], colour: grey } };
   for (let i = 0; i < 5; i++) {
     const guessLetter: string = guess[i];
     const targetLetter: string = hiddenTarget[i];
     if (guessLetter === targetLetter)
-      result[i] = { letter: guessLetter, colour: "#6a994e" };
+      result[i] = { letter: guessLetter, colour: green };
     else if (hiddenTarget.includes(guessLetter)) {
-      result[i] = { letter: guessLetter, colour: "yellow" };
+      result[i] = { letter: guessLetter, colour: yellow };
     } else {
-      result[i] = { letter: guessLetter, colour: "grey" };
+      result[i] = { letter: guessLetter, colour: grey };
     }
   }
   return result;
@@ -50,7 +50,7 @@ function removeExtraYellows(
   // remove excess yellows of the duplicate letter from markedResult, starting from the back, replace with grey
   for (let i = 4; i >= 0; i--) {
     if (isDuplicateYellow(modifiedResult, guess, hiddenTarget, i)) {
-      modifiedResult[i].colour = "grey";
+      modifiedResult[i].colour = grey;
     }
   }
   return modifiedResult;
@@ -63,7 +63,7 @@ function isDuplicateYellow(
   i: number
 ): boolean {
   const guessLetter = guess[i];
-  if (!(resultSoFar[i].colour === "yellow")) {
+  if (!(resultSoFar[i].colour === yellow)) {
     return false;
   }
   const letterInGuess = countLetter(guessLetter, guess);
