@@ -7,6 +7,6 @@ export interface LetterWithColour {
   colour: string;
 }
 
-export const green: string = "#6a994e";
-export const yellow: string = "#ffbe0b";
-export const grey: string = "grey";
+export const green = "#6a994e";
+export const yellow = "#ffbe0b";
+export const grey = "grey";
