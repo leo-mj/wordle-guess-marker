@@ -31,7 +31,7 @@ function markIgnoringRepetition(
     const guessLetter: string = guess[i];
     const targetLetter: string = hiddenTarget[i];
     if (guessLetter === targetLetter)
-      result[i] = { letter: guessLetter, colour: "green" };
+      result[i] = { letter: guessLetter, colour: "#6a994e" };
     else if (hiddenTarget.includes(guessLetter)) {
       result[i] = { letter: guessLetter, colour: "yellow" };
     } else {

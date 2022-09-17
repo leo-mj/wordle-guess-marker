@@ -13,11 +13,7 @@ export function CurrentGuess({ guessInput }: PropsCurrentGuess): JSX.Element {
     <>
       <div className="allRows">
         {guessArray.map((guessLetter, i) => (
-          <div
-            key={i}
-            className="letter"
-            style={{ backgroundColor: "white", color: "black" }}
-          >
+          <div key={i} className="letter" style={{ backgroundColor: "white" }}>
             <h1>{guessLetter}</h1>
           </div>
         ))}
