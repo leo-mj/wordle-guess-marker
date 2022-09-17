@@ -1,4 +1,4 @@
-import { LetterWithColour } from "../utils/wordle-guess-interface";
+import { LetterWithColour } from "../utils/interfaces";
 
 export function PresentEachLetter({
   letter,
