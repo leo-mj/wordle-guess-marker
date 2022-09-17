@@ -5,8 +5,18 @@ function App(): JSX.Element {
   const [guessing, setGuessing] = useState<boolean>(false);
   return (
     <>
-      {!guessing && <button onClick={() => setGuessing(true)}>Play</button>}
-      {guessing && <PlayWordle setGuessing={setGuessing} />}
+      <div className="menu-buttons">
+        {guessing ? (
+          <button className="menu-button" onClick={() => setGuessing(false)}>
+            Back to main menu
+          </button>
+        ) : (
+          <button className="menu-button" onClick={() => setGuessing(true)}>
+            Play
+          </button>
+        )}
+      </div>
+      {<PlayWordle />}
     </>
   );
 }
