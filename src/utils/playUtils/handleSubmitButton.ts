@@ -1,4 +1,4 @@
-import { MarkedGuess } from "../interfaces";
+import { MarkedGuess } from "../game-interfaces";
 import markWordle from "./mark-wordle";
 
 export function handleSubmitButton(
@@ -6,8 +6,7 @@ export function handleSubmitButton(
   setGuessInput: React.Dispatch<React.SetStateAction<string>>,
   allResults: MarkedGuess[],
   setAllResults: React.Dispatch<React.SetStateAction<MarkedGuess[]>>,
-  todaysSolution: string,
-  setSolvedStatus: React.Dispatch<React.SetStateAction<string>>
+  todaysSolution: string
 ): void {
   if (guessInput.length > 5) {
     alert("Too many letters!");
@@ -17,9 +16,6 @@ export function handleSubmitButton(
     alert("Not enough letters!");
     setGuessInput("");
     return;
-  }
-  if (guessInput === todaysSolution) {
-    setSolvedStatus("solved");
   }
   const result = markWordle(guessInput, todaysSolution);
   setAllResults([...allResults, result]);
