@@ -1,24 +1,42 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { handleSubmitButton } from "../../utils/playUtils/handleSubmitButton";
-import { MarkedGuess } from "../../utils/interfaces";
+import { MarkedGuess, SharedResult } from "../../utils/game-interfaces";
 import { Keyboard } from "./Keyboard";
 import { ShowAllResults } from "./ShowAllResults";
+import { resultsAsEmojis } from "../../utils/playUtils/resultsAsEmojis";
+import { ShowSharedResult } from "../ShowSharedResult";
+import { checkSolvedStatus } from "../../utils/playUtils/checkSolvedStatus";
 
 interface PropsGuessInterface {
   todaysSolution: string;
+  sharedResult: SharedResult | null;
+  setSharedResult: React.Dispatch<React.SetStateAction<SharedResult | null>>;
 }
 
 export function GuessInterface({
   todaysSolution,
+  sharedResult,
+  setSharedResult,
 }: PropsGuessInterface): JSX.Element {
   const [guessInput, setGuessInput] = useState<string>("");
 
   const [allResults, setAllResults] = useState<MarkedGuess[]>([]);
 
   const [solvedStatus, setSolvedStatus] = useState<string>("solving");
-  if (solvedStatus !== "solved" && allResults.length === 6) {
-    setSolvedStatus("failed");
-  }
+
+  useEffect(() => {
+    if (allResults && solvedStatus === "solving") {
+      checkSolvedStatus(allResults, setSolvedStatus);
+    }
+    if (solvedStatus !== "solving") {
+      const todaysSharedResult: SharedResult = {
+        guesses: allResults.length,
+        solvedStatus: solvedStatus,
+        emojis: resultsAsEmojis(allResults),
+      };
+      setSharedResult(todaysSharedResult);
+    }
+  }, [solvedStatus, allResults, setSharedResult]);
 
   return (
     <>
@@ -43,8 +61,7 @@ export function GuessInterface({
                   setGuessInput,
                   allResults,
                   setAllResults,
-                  todaysSolution,
-                  setSolvedStatus
+                  todaysSolution
                 );
               }}
             >
@@ -53,29 +70,30 @@ export function GuessInterface({
           </div>
         </>
       )}
-      {solvedStatus === "solved" && (
-        <h1 className="solutionMessage">Congratulations!</h1>
-      )}
-      {solvedStatus === "failed" && (
-        <h1 className="solutionMessage">
-          Too bad, loser! The solution was: {todaysSolution}
-        </h1>
+      {solvedStatus !== "solving" && sharedResult && (
+        <>
+          <ShowSharedResult
+            sharedResult={sharedResult}
+            todaysSolution={todaysSolution}
+          />
+        </>
       )}
 
       <div className="guessDisplay">
         <ShowAllResults allResults={allResults} guessInput={guessInput} />
       </div>
 
-      <div className="keyboard">
-        <Keyboard
-          guessInput={guessInput}
-          setGuessInput={setGuessInput}
-          allResults={allResults}
-          setAllResults={setAllResults}
-          todaysSolution={todaysSolution}
-          setSolvedStatus={setSolvedStatus}
-        />
-      </div>
+      {solvedStatus === "solving" && (
+        <div className="keyboard">
+          <Keyboard
+            guessInput={guessInput}
+            setGuessInput={setGuessInput}
+            allResults={allResults}
+            setAllResults={setAllResults}
+            todaysSolution={todaysSolution}
+          />
+        </div>
+      )}
     </>
   );
 }

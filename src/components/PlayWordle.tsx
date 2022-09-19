@@ -3,6 +3,7 @@ import { getTodaysDate } from "../utils/playUtils/getTodaysDate";
 import { getTodaysSolution } from "../utils/playUtils/getTodaysSolution";
 import { GuessInterface } from "../components/play/GuessInterface";
 import { PropsMainPages } from "../utils/menu-interfaces";
+import { SharedResult } from "../utils/game-interfaces";
 
 export function PlayWordle({ states }: PropsMainPages): JSX.Element {
   // const {
@@ -21,9 +22,15 @@ export function PlayWordle({ states }: PropsMainPages): JSX.Element {
     getTodaysSolution(setTodaysSolution, todaysDate);
   }, [todaysDate]);
 
+  const [sharedResult, setSharedResult] = useState<SharedResult | null>(null);
+
   return (
     <>
-      <GuessInterface todaysSolution={todaysSolution} />
+      <GuessInterface
+        todaysSolution={todaysSolution}
+        sharedResult={sharedResult}
+        setSharedResult={setSharedResult}
+      />
     </>
   );
 }

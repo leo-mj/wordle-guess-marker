@@ -10,3 +10,9 @@ export interface LetterWithColour {
 export const green = "#6a994e";
 export const yellow = "#ffbe0b";
 export const grey = "grey";
+
+export interface SharedResult {
+  guesses: number;
+  solvedStatus: string;
+  emojis: string[][];
+}

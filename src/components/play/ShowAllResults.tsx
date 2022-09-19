@@ -1,4 +1,4 @@
-import { MarkedGuess } from "../../utils/interfaces";
+import { MarkedGuess } from "../../utils/game-interfaces";
 import { CurrentGuess } from "./CurrentGuess";
 import { ShowEmptyRow } from "./ShowEmptyRow";
 import { OneGuess } from "./OneGuess";

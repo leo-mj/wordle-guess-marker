@@ -1,5 +1,5 @@
 import { handleSubmitButton } from "../../utils/playUtils/handleSubmitButton";
-import { MarkedGuess } from "../../utils/interfaces";
+import { MarkedGuess } from "../../utils/game-interfaces";
 
 interface PropsKeyboard {
   guessInput: string;
@@ -7,7 +7,6 @@ interface PropsKeyboard {
   allResults: MarkedGuess[];
   setAllResults: React.Dispatch<React.SetStateAction<MarkedGuess[]>>;
   todaysSolution: string;
-  setSolvedStatus: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export function Keyboard({
@@ -16,7 +15,6 @@ export function Keyboard({
   allResults,
   setAllResults,
   todaysSolution,
-  setSolvedStatus,
 }: PropsKeyboard): JSX.Element {
   return (
     <div id="keyboard">
@@ -51,8 +49,7 @@ export function Keyboard({
               setGuessInput,
               allResults,
               setAllResults,
-              todaysSolution,
-              setSolvedStatus
+              todaysSolution
             )
           }
         >
