@@ -1,4 +1,4 @@
-import { handleSubmitButton } from "../../utils/handleSubmitButton";
+import { handleSubmitButton } from "../../utils/playUtils/handleSubmitButton";
 import { MarkedGuess } from "../../utils/interfaces";
 
 interface PropsKeyboard {

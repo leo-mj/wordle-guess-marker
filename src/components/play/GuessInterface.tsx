@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { handleSubmitButton } from "../../utils/handleSubmitButton";
+import { handleSubmitButton } from "../../utils/playUtils/handleSubmitButton";
 import { MarkedGuess } from "../../utils/interfaces";
 import { Keyboard } from "./Keyboard";
 import { ShowAllResults } from "./ShowAllResults";

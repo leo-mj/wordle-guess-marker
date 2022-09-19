@@ -1,5 +1,5 @@
 import axios from "axios";
-import { baseURL } from "./databaseURL";
+import { baseURL } from "../databaseURL";
 
 export async function getTodaysSolution(
   setTodaysSolution: React.Dispatch<React.SetStateAction<string>>,

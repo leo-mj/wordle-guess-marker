@@ -1,7 +1,7 @@
 /*Write a function, `markWordleGuess(guess: string, hiddenTarget: string):MarkedGuess` 
 which calculates the correctness hints for each letter of a given single guess in Wordle based on the given hidden target.
 Assume that the strings guess and hiddenTarget are always formed of exactly 5 upper-case alphabet characters (often with repeats).*/
-import { green, grey, MarkedGuess, yellow } from "./interfaces";
+import { green, grey, MarkedGuess, yellow } from "../interfaces";
 
 /**
  * returns a marked wordle guess

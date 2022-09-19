@@ -1,4 +1,4 @@
-import { MarkedGuess } from "./interfaces";
+import { MarkedGuess } from "../interfaces";
 import markWordle from "./mark-wordle";
 
 export function handleSubmitButton(

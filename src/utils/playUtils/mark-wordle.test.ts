@@ -1,4 +1,4 @@
-import { green, grey, yellow } from "./interfaces";
+import { green, grey, yellow } from "../interfaces";
 import markWordle from "./mark-wordle";
 
 test("markWordle returns correct green mark", () => {

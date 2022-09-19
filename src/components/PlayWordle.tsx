@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { getTodaysDate } from "../utils/getTodaysDate";
-import { getTodaysSolution } from "../utils/getTodaysSolution";
+import { getTodaysDate } from "../utils/playUtils/getTodaysDate";
+import { getTodaysSolution } from "../utils/playUtils/getTodaysSolution";
 import { GuessInterface } from "./play/GuessInterface";
 
 export function PlayWordle(): JSX.Element {
