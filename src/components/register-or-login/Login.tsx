@@ -3,16 +3,8 @@ import { baseURL } from "../../utils/databaseURL";
 import { PropsMainPages } from "../../utils/menu-interfaces";
 
 export function Login({ states }: PropsMainPages): JSX.Element {
-  const {
-    selectedPage,
-    setSelectedPage,
-    user,
-    setUser,
-    password,
-    setPassword,
-    loggedIn,
-    setLoggedIn,
-  } = states;
+  const { setSelectedPage, user, setUser, password, setPassword, setLoggedIn } =
+    states;
   const handleLoginButton = async () => {
     const res = await axios.get(`${baseURL}login/${user}/${password}`);
     if (res.data.status === "success") {
