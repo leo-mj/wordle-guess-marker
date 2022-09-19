@@ -1,5 +1,5 @@
-import { handleSubmitButton } from "../utils/handleSubmitButton";
-import { MarkedGuess } from "../utils/interfaces";
+import { handleSubmitButton } from "../../utils/handleSubmitButton";
+import { MarkedGuess } from "../../utils/interfaces";
 
 interface PropsKeyboard {
   guessInput: string;

@@ -1,4 +1,4 @@
-import { LetterWithColour, MarkedGuess } from "../utils/interfaces";
+import { LetterWithColour, MarkedGuess } from "../../utils/interfaces";
 
 interface PropsOneGuess {
   result: MarkedGuess;
