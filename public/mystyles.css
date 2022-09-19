@@ -12,6 +12,7 @@
     border: 5px solid #eb5e28;
     border-radius: 3px;
     box-shadow: 3px 3px black;
+    margin: 1% 1% 1% 1%;
 }
 
 .menu-button:hover {
@@ -121,4 +122,21 @@
 
 .key:hover {
     box-shadow: 4px 4px #e0fbfc;
+}
+
+.login-interface {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.login-interface input {
+    font-size: xx-large;
+    margin: 1% 0 1% 0;
+}
+
+.login-interface button {
+    font-size: xx-large;
 }
