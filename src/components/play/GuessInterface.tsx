@@ -11,18 +11,20 @@ interface PropsGuessInterface {
   todaysSolution: string;
   sharedResult: SharedResult | null;
   setSharedResult: React.Dispatch<React.SetStateAction<SharedResult | null>>;
+  solvedStatus: string;
+  setSolvedStatus: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export function GuessInterface({
   todaysSolution,
   sharedResult,
   setSharedResult,
+  solvedStatus,
+  setSolvedStatus,
 }: PropsGuessInterface): JSX.Element {
   const [guessInput, setGuessInput] = useState<string>("");
 
   const [allResults, setAllResults] = useState<MarkedGuess[]>([]);
-
-  const [solvedStatus, setSolvedStatus] = useState<string>("solving");
 
   useEffect(() => {
     if (allResults && solvedStatus === "solving") {
@@ -36,7 +38,7 @@ export function GuessInterface({
       };
       setSharedResult(todaysSharedResult);
     }
-  }, [solvedStatus, allResults, setSharedResult]);
+  }, [solvedStatus, setSolvedStatus, allResults, setSharedResult]);
 
   return (
     <>
