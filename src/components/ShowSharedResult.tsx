@@ -23,7 +23,7 @@ export function ShowSharedResult({
           <div className="emoji-row" key={i}>
             {emojiRow.map((emoji, j) => (
               <div className="one-emoji" key={j}>
-                {emoji}
+                {emoji + " "}
               </div>
             ))}
           </div>

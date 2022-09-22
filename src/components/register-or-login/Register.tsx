@@ -5,28 +5,24 @@ import { PropsMainPages } from "../../utils/menu-interfaces";
 export function Register({ states }: PropsMainPages): JSX.Element {
   const { setSelectedPage, user, setUser, password, setPassword, setLoggedIn } =
     states;
-
   const handleRegisterButton = async () => {
-    const res = await axios.post(`${baseURL}register`, {
-      user: user,
-      password: password,
-    });
-    console.log(res.data.message);
-    if (res.data.status === "success") {
+    try {
+      await axios.post(baseURL + "register", {
+        user: user,
+        password: password,
+      });
       setLoggedIn(true);
       setSelectedPage("play");
-    } else if (res.data.message.includes("already exists")) {
-      alert("Username already exists!");
-      setUser(null);
-      setPassword(null);
-    } else {
-      alert("Something went wrong");
+    } catch (err) {
+      console.error(err);
+      alert("Username might already exist");
       setUser(null);
       setPassword(null);
     }
   };
   return (
     <div className="login-interface">
+      Do not re-use passwords!!!
       <input
         type="text"
         onChange={(e) => setUser(e.target.value)}

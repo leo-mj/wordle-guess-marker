@@ -23,11 +23,12 @@ export function ShowAllResults({
       {allResults.map((result, i) => (
         <OneGuess key={i} result={result} />
       ))}
-      {guessInput.length > 0 ? (
-        <CurrentGuess guessInput={guessInput} />
-      ) : (
-        <ShowEmptyRow row={emptyRow} />
-      )}
+      {allResults.length < 6 &&
+        (guessInput.length > 0 ? (
+          <CurrentGuess guessInput={guessInput} />
+        ) : (
+          <ShowEmptyRow row={emptyRow} />
+        ))}
       {allResults.length < 5 &&
         emptyRows.map((row, i) => <ShowEmptyRow key={i} row={row} />)}
     </>

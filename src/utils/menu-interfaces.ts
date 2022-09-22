@@ -1,4 +1,4 @@
-export interface stateVariables {
+export interface StateVariables {
   selectedPage: string;
   setSelectedPage: React.Dispatch<React.SetStateAction<string>>;
   user: string | null;
@@ -10,5 +10,5 @@ export interface stateVariables {
 }
 
 export interface PropsMainPages {
-  states: stateVariables;
+  states: StateVariables;
 }
