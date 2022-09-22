@@ -5,7 +5,6 @@ import { PropsMainPages } from "../../utils/menu-interfaces";
 export function Register({ states }: PropsMainPages): JSX.Element {
   const { setSelectedPage, user, setUser, password, setPassword, setLoggedIn } =
     states;
-
   const handleRegisterButton = async () => {
     try {
       await axios.post(baseURL + "register", {

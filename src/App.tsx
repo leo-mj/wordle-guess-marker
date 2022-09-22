@@ -1,15 +1,16 @@
 import { useState } from "react";
+import { Multiplayer } from "./components/Multiplayer";
 import { PlayWordle } from "./components/PlayWordle";
 import { Login } from "./components/register-or-login/Login";
 import { Register } from "./components/register-or-login/Register";
-import { stateVariables } from "./utils/menu-interfaces";
+import { StateVariables } from "./utils/menu-interfaces";
 
 function App(): JSX.Element {
   const [selectedPage, setSelectedPage] = useState<string>("main menu");
   const [user, setUser] = useState<string | null>(null);
   const [password, setPassword] = useState<string | null>(null);
   const [loggedIn, setLoggedIn] = useState<boolean>(false);
-  const states: stateVariables = {
+  const states: StateVariables = {
     selectedPage: selectedPage,
     setSelectedPage: setSelectedPage,
     user: user,
@@ -65,10 +66,19 @@ function App(): JSX.Element {
             Main Menu
           </button>
         )}
+        {selectedPage !== "multiplayer" && loggedIn && (
+          <button
+            className="menu-button"
+            onClick={() => setSelectedPage("multiplayer")}
+          >
+            Multiplayer
+          </button>
+        )}
       </div>
       {selectedPage === "play" && <PlayWordle states={states} />}
       {selectedPage === "login" && <Login states={states} />}
       {selectedPage === "register" && <Register states={states} />}
+      {selectedPage === "multiplayer" && <Multiplayer states={states} />}
     </>
   );
 }
