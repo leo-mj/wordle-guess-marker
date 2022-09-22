@@ -22,6 +22,7 @@ export function Register({ states }: PropsMainPages): JSX.Element {
   };
   return (
     <div className="login-interface">
+      Do not re-use passwords!!!
       <input
         type="text"
         onChange={(e) => setUser(e.target.value)}
