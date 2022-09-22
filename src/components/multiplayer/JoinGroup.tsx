@@ -12,7 +12,7 @@ export function JoinGroup({
   const [groupPasscode, setGroupPasscode] = useState<string | null>(null);
   const handleJoinButton = async () => {
     try {
-      axios.post(baseURL + "groups/join/" + groupName, {
+      await axios.post(baseURL + "groups/join/" + groupName, {
         user: user,
         userPassword: password,
         groupPasscode: groupPasscode,
@@ -37,7 +37,7 @@ export function JoinGroup({
         placeholder="group passcode"
       />
       <button className="submitButton" onClick={() => handleJoinButton()}>
-        Create
+        Join
       </button>
     </div>
   );
