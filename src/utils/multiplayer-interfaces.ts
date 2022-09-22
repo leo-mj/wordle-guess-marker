@@ -1,3 +1,5 @@
+import { StateVariables } from "./menu-interfaces";
+
 export interface GroupEntry {
   username: string;
   guesses: number;
@@ -8,4 +10,9 @@ export interface GroupEntry {
 export interface Group {
   groupName: string;
   groupEntries: GroupEntry[];
+}
+
+export interface PropsMultiplayerPages {
+  states: StateVariables;
+  setMultiplayerPage: React.Dispatch<React.SetStateAction<string>>;
 }

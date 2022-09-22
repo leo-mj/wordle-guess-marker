@@ -59,8 +59,18 @@ export function Multiplayer({ states }: PropsMainPages): JSX.Element {
               </button>
             )}
           </div>
-          {multiplayerPage === "join" && <JoinGroup states={states} />}
-          {multiplayerPage === "create" && <CreateGroup states={states} />}
+          {multiplayerPage === "join" && (
+            <JoinGroup
+              states={states}
+              setMultiplayerPage={setMultiplayerPage}
+            />
+          )}
+          {multiplayerPage === "create" && (
+            <CreateGroup
+              states={states}
+              setMultiplayerPage={setMultiplayerPage}
+            />
+          )}
           {multiplayerPage === "all groups" &&
             myGroups &&
             myGroups.map((group, i) => (

@@ -1,9 +1,12 @@
 import axios from "axios";
 import { useState } from "react";
 import { baseURL } from "../../utils/databaseURL";
-import { PropsMainPages } from "../../utils/menu-interfaces";
+import { PropsMultiplayerPages } from "../../utils/multiplayer-interfaces";
 
-export function JoinGroup({ states }: PropsMainPages): JSX.Element {
+export function JoinGroup({
+  states,
+  setMultiplayerPage,
+}: PropsMultiplayerPages): JSX.Element {
   const { user, password } = states;
   const [groupName, setGroupName] = useState<string | null>(null);
   const [groupPasscode, setGroupPasscode] = useState<string | null>(null);
@@ -14,6 +17,7 @@ export function JoinGroup({ states }: PropsMainPages): JSX.Element {
         userPassword: password,
         groupPasscode: groupPasscode,
       });
+      setMultiplayerPage("all groups");
     } catch (err) {
       console.error(err);
     }
