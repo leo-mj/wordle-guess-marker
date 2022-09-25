@@ -23,22 +23,18 @@ export function JoinGroup({
     }
   };
   return (
-    <div className="inputFields">
+    <div className="login-interface">
       <input
-        className="textInput"
         type="text"
         onChange={(e) => setGroupName(e.target.value)}
         placeholder="group name"
       />
       <input
-        className="textInput"
         type="text"
         onChange={(e) => setGroupPasscode(e.target.value)}
         placeholder="group passcode"
       />
-      <button className="submitButton" onClick={() => handleJoinButton()}>
-        Join
-      </button>
+      <button onClick={() => handleJoinButton()}>Join</button>
     </div>
   );
 }

@@ -29,7 +29,7 @@ export function Register({ states }: PropsMainPages): JSX.Element {
         placeholder="username"
       />
       <input
-        type="password"
+        type="text"
         onChange={(e) => setPassword(e.target.value)}
         placeholder="password"
       />

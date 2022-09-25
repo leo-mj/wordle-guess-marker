@@ -23,22 +23,18 @@ export function CreateGroup({
     }
   };
   return (
-    <div className="inputFields">
+    <div className="login-interface">
       <input
-        className="textInput"
         type="text"
         onChange={(e) => setGroupName(e.target.value)}
         placeholder="group name"
       />
       <input
-        className="textInput"
         type="text"
         onChange={(e) => setGroupPasscode(e.target.value)}
         placeholder="group passcode"
       />
-      <button className="submitButton" onClick={() => handleCreateButton()}>
-        Create
-      </button>
+      <button onClick={() => handleCreateButton()}>Create</button>
     </div>
   );
 }

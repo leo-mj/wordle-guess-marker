@@ -1,0 +1,37 @@
+.login-interface {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  border: 5px solid #eb5e28;
+  border-radius: 3px;
+  box-shadow: 3px 3px black;
+  margin: 2% 5% 2% 5%;
+  padding: 2% 5% 2% 5%;
+  background-color: #8d99ae;
+
+  input {
+    font-size: xxx-large;
+    text-align: center;
+    margin: 2% 2% 2% 2%;
+    color: white;
+    background-color: #2b2d42;
+    border: 5px solid white;
+    border-radius: 3px;
+    box-shadow: 3px 3px #eb5e28;
+  }
+
+  button {
+    font-size: xxx-large;
+    color: white;
+    background-color: #2b2d42;
+    border: 5px solid white;
+    border-radius: 3px;
+    box-shadow: 3px 3px #eb5e28;
+  }
+
+  button:hover {
+    box-shadow: 4px 4px #e0fbfc;
+  }
+}

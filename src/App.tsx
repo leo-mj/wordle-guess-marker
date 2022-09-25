@@ -4,6 +4,7 @@ import { PlayWordle } from "./components/PlayWordle";
 import { Login } from "./components/register-or-login/Login";
 import { Register } from "./components/register-or-login/Register";
 import { StateVariables } from "./utils/menu-interfaces";
+import "./scss/mystyles.scss";
 
 function App(): JSX.Element {
   const [selectedPage, setSelectedPage] = useState<string>("main menu");

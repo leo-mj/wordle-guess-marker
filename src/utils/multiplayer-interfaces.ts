@@ -3,7 +3,7 @@ import { StateVariables } from "./menu-interfaces";
 export interface GroupEntry {
   username: string;
   guesses: number;
-  solved: string;
+  solved_status: string;
   emojis: string;
 }
 

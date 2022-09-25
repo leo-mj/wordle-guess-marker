@@ -1,0 +1,18 @@
+.menu-buttons {
+  display: flex;
+  justify-content: center;
+}
+
+.menu-button {
+  font-size: 350%;
+  color: white;
+  background-color: #2b2d42;
+  border: 5px solid #eb5e28;
+  border-radius: 3px;
+  box-shadow: 3px 3px black;
+  margin: 1% 1% 1% 1%;
+}
+
+.menu-button:hover {
+  box-shadow: 4px 4px #3d5a80;
+}
