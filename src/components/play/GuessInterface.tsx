@@ -4,7 +4,7 @@ import { MarkedGuess, SharedResult } from "../../utils/game-interfaces";
 import { Keyboard } from "./Keyboard";
 import { ShowAllResults } from "./ShowAllResults";
 import { resultsAsEmojis } from "../../utils/playUtils/resultsAsEmojis";
-import { ShowSharedResult } from "../ShowSharedResult";
+import { ShowSharedResult } from "./ShowSharedResult";
 import { checkSolvedStatus } from "../../utils/playUtils/checkSolvedStatus";
 
 interface PropsGuessInterface {
@@ -46,7 +46,6 @@ export function GuessInterface({
         <>
           <div className="inputFields">
             <input
-              className="textInput"
               maxLength={5}
               type="text"
               value={guessInput}
@@ -56,7 +55,6 @@ export function GuessInterface({
               placeholder="type Wordle guess"
             />
             <button
-              className="submitButton"
               onClick={() => {
                 handleSubmitButton(
                   guessInput,

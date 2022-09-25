@@ -1,13 +1,13 @@
-export function arrangeEmojis(emojis: string): string[] {
+export function arrangeEmojis(inputEmojis: string): string[] {
+  const emojis = inputEmojis;
   const emojisArr = emojis.split(",");
   const allEmojiRows: string[] = [];
-  for (let i = 0; i < emojisArr.length / 5; i++) {
+  while (emojisArr.length > 0) {
     const oneEmojiRow = [];
     for (let j = 0; j < 5; j++) {
       oneEmojiRow.push(emojisArr.shift());
     }
     const emojisStr = oneEmojiRow.join("");
-    console.log(emojisStr);
     allEmojiRows.push(emojisStr);
   }
   return allEmojiRows;

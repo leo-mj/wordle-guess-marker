@@ -15,9 +15,9 @@ export function OneGroup({ group }: PropsAllGroups): JSX.Element {
         {group.groupEntries.map((entry, i) => (
           <div className="group-entry" key={i}>
             <div className="group-entry-description">
-              <h3>{entry.username}</h3>
-              <p>{entry.solved}</p>
-              <p>{entry.guesses}/6 attempts</p>
+              <b>{entry.username}</b>
+              {entry.solved_status}
+              {entry.guesses}/6 attempts
             </div>
             <div className="group-entry-emojis">
               {arrangeEmojis(entry.emojis).map((emojiRow, i) => (

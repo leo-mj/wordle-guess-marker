@@ -12,7 +12,7 @@ function transformOneResult(oneResult: MarkedGuess): string[] {
     } else if (oneResult[i].colour === yellow) {
       emojiRow.push("🟨");
     } else if (oneResult[i].colour === grey) {
-      emojiRow.push("⬛ ");
+      emojiRow.push("⬛");
     }
   }
   return emojiRow;
