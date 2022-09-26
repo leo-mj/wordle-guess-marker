@@ -28,9 +28,30 @@
   font-size: xx-large;
   margin: 2% 10% 2% 10%;
   padding: 2% 10% 2% 10%;
+
+  h2 {
+    border: 5px solid #eb5e28;
+    border-radius: 3px;
+    box-shadow: 3px 3px #2b2d42;
+    padding: 1% 1% 1% 1%;
+  }
+
+  button {
+    font-size: xx-large;
+    color: white;
+    background-color: #2b2d42;
+    border: 5px solid #eb5e28;
+    border-radius: 3px;
+    box-shadow: 3px 3px #2b2d42;
+    margin: 3% 3% 3% 3%;
+  }
+
+  button:hover {
+    box-shadow: 4px 4px #e0fbfc;
+  }
 }
 
-.all-group-entries {
+.all-entries {
   display: block;
 }
 

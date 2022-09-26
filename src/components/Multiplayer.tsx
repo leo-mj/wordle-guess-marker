@@ -14,6 +14,7 @@ export function Multiplayer({ states }: PropsMainPages): JSX.Element {
 
   const todaysDate = getTodaysDate();
   const [myGroups, setMyGroups] = useState<Group[] | null>(null);
+  const [leaveGroup, setLeaveGroup] = useState<string>("none");
 
   useEffect(() => {
     const getGroups = async () => {
@@ -27,7 +28,7 @@ export function Multiplayer({ states }: PropsMainPages): JSX.Element {
       }
     };
     getGroups();
-  }, [password, todaysDate, user, multiplayerPage]);
+  }, [password, todaysDate, user, multiplayerPage, leaveGroup]);
 
   return (
     <>
@@ -75,7 +76,11 @@ export function Multiplayer({ states }: PropsMainPages): JSX.Element {
             myGroups &&
             myGroups.map((group, i) => (
               <div key={i}>
-                <OneGroup states={states} group={group} />
+                <OneGroup
+                  states={states}
+                  group={group}
+                  setLeaveGroup={setLeaveGroup}
+                />
               </div>
             ))}
           {myGroups === null && (

@@ -1,17 +1,38 @@
+import axios from "axios";
 import { arrangeEmojis } from "../../utils/arrangeEmojis";
+import { baseURL } from "../../utils/databaseURL";
 import { StateVariables } from "../../utils/menu-interfaces";
 import { Group } from "../../utils/multiplayer-interfaces";
 
 interface PropsAllGroups {
   states: StateVariables;
   group: Group;
+  setLeaveGroup: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export function OneGroup({ group }: PropsAllGroups): JSX.Element {
+export function OneGroup({
+  group,
+  states,
+  setLeaveGroup,
+}: PropsAllGroups): JSX.Element {
+  const { user, password } = states;
+
+  const handleLeaveGroup = async () => {
+    try {
+      await axios.delete(
+        baseURL + `groups/exit/${group.groupName}/${user}/${password}`
+      );
+      alert(`You have left ${group.groupName}`);
+      setLeaveGroup(group.groupName);
+    } catch (error) {
+      console.error(error);
+      alert("Something went wrong. Try again");
+    }
+  };
   return (
     <div className="one-group">
       <h2>{group.groupName}</h2>
-      <div className="all-group-entries">
+      <div className="all-entries">
         {group.groupEntries.map((entry, i) => (
           <div className="group-entry" key={i}>
             <div className="group-entry-description">
@@ -26,6 +47,9 @@ export function OneGroup({ group }: PropsAllGroups): JSX.Element {
             </div>
           </div>
         ))}
+        <button className="group-button" onClick={handleLeaveGroup}>
+          Leave
+        </button>
       </div>
     </div>
   );
