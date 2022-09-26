@@ -5,6 +5,7 @@ import { Login } from "./components/register-or-login/Login";
 import { Register } from "./components/register-or-login/Register";
 import { StateVariables } from "./utils/menu-interfaces";
 import "./scss/mystyles.scss";
+import { ManageAccount } from "./components/ManageAccount";
 
 function App(): JSX.Element {
   const [selectedPage, setSelectedPage] = useState<string>("main menu");
@@ -75,11 +76,22 @@ function App(): JSX.Element {
             Multiplayer
           </button>
         )}
+        {loggedIn && selectedPage !== "manage account" && (
+          <button
+            className="menu-button"
+            onClick={() => setSelectedPage("manage account")}
+          >
+            Account
+          </button>
+        )}
       </div>
       {selectedPage === "play" && <PlayWordle states={states} />}
       {selectedPage === "login" && <Login states={states} />}
       {selectedPage === "register" && <Register states={states} />}
       {selectedPage === "multiplayer" && <Multiplayer states={states} />}
+      {selectedPage === "manage account" && loggedIn && (
+        <ManageAccount states={states} />
+      )}
       {selectedPage === "main menu" && !loggedIn && (
         <div className="about">
           <i>Play:</i>
