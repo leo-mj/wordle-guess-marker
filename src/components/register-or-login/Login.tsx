@@ -28,13 +28,20 @@ export function Login({ states }: PropsMainPages): JSX.Element {
     <div className="login-interface">
       <input
         type="text"
+        value={user}
         onChange={(e) => setUser(e.target.value)}
         placeholder="username"
       />
       <input
         type="password"
+        value={password}
         onChange={(e) => setPassword(e.target.value)}
         placeholder="password"
+        onKeyDown={async (event) => {
+          if (event.key === "Enter") {
+            await handleLoginButton();
+          }
+        }}
       />
       {user && password && (
         <button

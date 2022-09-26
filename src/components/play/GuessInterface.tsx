@@ -52,18 +52,29 @@ export function GuessInterface({
               onChange={(e) => {
                 setGuessInput(e.target.value.toUpperCase());
               }}
+              onKeyDown={(event) => {
+                if (event.key === "Enter") {
+                  handleSubmitButton(
+                    guessInput,
+                    setGuessInput,
+                    allResults,
+                    setAllResults,
+                    todaysSolution
+                  );
+                }
+              }}
               placeholder="type Wordle guess"
             />
             <button
-              onClick={() => {
+              onClick={() =>
                 handleSubmitButton(
                   guessInput,
                   setGuessInput,
                   allResults,
                   setAllResults,
                   todaysSolution
-                );
-              }}
+                )
+              }
             >
               ↩
             </button>

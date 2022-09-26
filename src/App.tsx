@@ -54,6 +54,8 @@ function App(): JSX.Element {
             className="menu-button"
             onClick={() => {
               setLoggedIn(false);
+              setUser("");
+              setPassword("");
               setSelectedPage("main menu");
             }}
           >

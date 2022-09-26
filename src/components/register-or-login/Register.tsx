@@ -26,13 +26,20 @@ export function Register({ states }: PropsMainPages): JSX.Element {
       <h1>Do not re-use passwords!!!</h1>
       <input
         type="text"
+        value={user}
         onChange={(e) => setUser(e.target.value)}
         placeholder="username"
       />
       <input
         type="text"
+        value={user}
         onChange={(e) => setPassword(e.target.value)}
         placeholder="password"
+        onKeyDown={async (event) => {
+          if (event.key === "Enter") {
+            await handleRegisterButton();
+          }
+        }}
       />
       {user && password && (
         <button
