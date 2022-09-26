@@ -37,8 +37,8 @@ export function OneGroup({
           <div className="group-entry" key={i}>
             <div className="group-entry-description">
               <b>{entry.username}</b>
-              {entry.solved_status}
-              {entry.guesses}/6 attempts
+              <p>{entry.solved_status}</p>
+              <p>{entry.guesses}/6 attempts</p>
             </div>
             <div className="group-entry-emojis">
               {arrangeEmojis(entry.emojis).map((emojiRow, i) => (
