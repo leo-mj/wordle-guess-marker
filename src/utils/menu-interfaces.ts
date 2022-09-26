@@ -1,10 +1,10 @@
 export interface StateVariables {
   selectedPage: string;
   setSelectedPage: React.Dispatch<React.SetStateAction<string>>;
-  user: string | null;
-  setUser: React.Dispatch<React.SetStateAction<string | null>>;
-  password: string | null;
-  setPassword: React.Dispatch<React.SetStateAction<string | null>>;
+  user: string;
+  setUser: React.Dispatch<React.SetStateAction<string>>;
+  password: string;
+  setPassword: React.Dispatch<React.SetStateAction<string>>;
   loggedIn: boolean;
   setLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
 }

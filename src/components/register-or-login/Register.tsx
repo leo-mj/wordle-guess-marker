@@ -11,18 +11,19 @@ export function Register({ states }: PropsMainPages): JSX.Element {
         user: user,
         password: password,
       });
+      alert("Success!");
       setLoggedIn(true);
       setSelectedPage("play");
     } catch (err) {
       console.error(err);
-      alert("Username might already exist");
-      setUser(null);
-      setPassword(null);
+      alert("Username might already exist. Try again");
+      setUser("");
+      setPassword("");
     }
   };
   return (
     <div className="login-interface">
-      Do not re-use passwords!!!
+      <h1>Do not re-use passwords!!!</h1>
       <input
         type="text"
         onChange={(e) => setUser(e.target.value)}

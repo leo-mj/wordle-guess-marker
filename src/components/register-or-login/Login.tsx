@@ -8,13 +8,14 @@ export function Login({ states }: PropsMainPages): JSX.Element {
   const handleLoginButton = async () => {
     try {
       await axios.get(`${baseURL}login/${user}/${password}`);
+      alert("Success!");
       setSelectedPage("play");
       setLoggedIn(true);
     } catch (err) {
       console.error(err);
       alert("Wrong password or username");
-      setPassword(null);
-      setUser(null);
+      setPassword("");
+      setUser("");
     }
   };
   return (

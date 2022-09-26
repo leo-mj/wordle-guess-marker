@@ -8,8 +8,8 @@ import "./scss/mystyles.scss";
 
 function App(): JSX.Element {
   const [selectedPage, setSelectedPage] = useState<string>("main menu");
-  const [user, setUser] = useState<string | null>(null);
-  const [password, setPassword] = useState<string | null>(null);
+  const [user, setUser] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
   const [loggedIn, setLoggedIn] = useState<boolean>(false);
   const states: StateVariables = {
     selectedPage: selectedPage,
@@ -24,7 +24,7 @@ function App(): JSX.Element {
   return (
     <>
       <div className="menu-buttons">
-        {selectedPage === "main menu" && (
+        {selectedPage !== "play" && (
           <button
             className="menu-button"
             onClick={() => setSelectedPage("play")}
@@ -59,7 +59,7 @@ function App(): JSX.Element {
             Log Out
           </button>
         )}
-        {selectedPage !== "main menu" && (
+        {selectedPage !== "main menu" && !loggedIn && (
           <button
             className="menu-button"
             onClick={() => setSelectedPage("main menu")}
@@ -80,6 +80,20 @@ function App(): JSX.Element {
       {selectedPage === "login" && <Login states={states} />}
       {selectedPage === "register" && <Register states={states} />}
       {selectedPage === "multiplayer" && <Multiplayer states={states} />}
+      {selectedPage === "main menu" && !loggedIn && (
+        <div className="about">
+          <i>Play:</i>
+          <p> Play a game of Wordle without saving your results anywhere</p>
+          <i>Login:</i>
+          <p>
+            {" "}
+            Once you are logged in, you can join groups and share your results
+            with others!
+          </p>
+          <i>Register:</i>
+          <p> Create an account so you can use the multiplayer features!</p>
+        </div>
+      )}
     </>
   );
 }

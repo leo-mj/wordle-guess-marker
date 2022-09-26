@@ -78,9 +78,24 @@ export function Multiplayer({ states }: PropsMainPages): JSX.Element {
                 <OneGroup states={states} group={group} />
               </div>
             ))}
+          {myGroups === null && (
+            <div className="about">
+              <i>Join Group:</i>
+              <p>
+                Join a group in order to share your daily results with group
+                members
+              </p>
+              <i>Create Group:</i>
+              <p>Create a new group</p>
+            </div>
+          )}
         </div>
       )}
-      {!loggedIn && <h1>You need to log in for Multiplayer mode</h1>}
+      {!loggedIn && (
+        <div className="about">
+          <h1>You need to log in for Multiplayer mode</h1>
+        </div>
+      )}
     </>
   );
 }
