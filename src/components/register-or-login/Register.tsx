@@ -32,7 +32,7 @@ export function Register({ states }: PropsMainPages): JSX.Element {
       />
       <input
         type="text"
-        value={user}
+        value={password}
         onChange={(e) => setPassword(e.target.value)}
         placeholder="password"
         onKeyDown={async (event) => {
