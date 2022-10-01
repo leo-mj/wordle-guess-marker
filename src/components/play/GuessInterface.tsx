@@ -75,6 +75,9 @@ export function GuessInterface({
                   todaysSolution
                 )
               }
+              style={{
+                boxShadow: guessInput.length === 5 ? "7px 7px #e0fbfc" : "",
+              }}
             >
               ↩
             </button>

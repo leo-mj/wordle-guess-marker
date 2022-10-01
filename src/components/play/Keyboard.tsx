@@ -16,6 +16,13 @@ export function Keyboard({
   setAllResults,
   todaysSolution,
 }: PropsKeyboard): JSX.Element {
+  const handleKeyBoardInput = (letter: string) => {
+    if (guessInput.length < 5) {
+      setGuessInput(guessInput + letter);
+    }
+    return;
+  };
+
   return (
     <div id="keyboard">
       <div className="keyboard-row">
@@ -23,7 +30,7 @@ export function Keyboard({
           <button
             className="key"
             key={i}
-            onClick={() => setGuessInput(guessInput + letter)}
+            onClick={() => handleKeyBoardInput(letter)}
           >
             {letter}
           </button>
@@ -34,7 +41,7 @@ export function Keyboard({
           <button
             className="key"
             key={i}
-            onClick={() => setGuessInput(guessInput + letter)}
+            onClick={() => handleKeyBoardInput(letter)}
           >
             {letter}
           </button>
@@ -52,6 +59,9 @@ export function Keyboard({
               todaysSolution
             )
           }
+          style={{
+            boxShadow: guessInput.length === 5 ? "7px 7px #e0fbfc" : "",
+          }}
         >
           {" "}
           ↩{" "}
@@ -60,7 +70,7 @@ export function Keyboard({
           <button
             className="key"
             key={i}
-            onClick={() => setGuessInput(guessInput + letter)}
+            onClick={() => handleKeyBoardInput(letter)}
           >
             {letter}
           </button>
