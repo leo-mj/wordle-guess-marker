@@ -1,5 +1,6 @@
 import { handleSubmitButton } from "../../utils/playUtils/handleSubmitButton";
 import { MarkedGuess } from "../../utils/game-interfaces";
+import { keyColour } from "../../utils/playUtils/keyColour";
 
 interface PropsKeyboard {
   guessInput: string;
@@ -31,6 +32,7 @@ export function Keyboard({
             className="key"
             key={i}
             onClick={() => handleKeyBoardInput(letter)}
+            style={{ backgroundColor: keyColour(letter, allResults) }}
           >
             {letter}
           </button>
@@ -42,6 +44,7 @@ export function Keyboard({
             className="key"
             key={i}
             onClick={() => handleKeyBoardInput(letter)}
+            style={{ backgroundColor: keyColour(letter, allResults) }}
           >
             {letter}
           </button>
@@ -71,6 +74,7 @@ export function Keyboard({
             className="key"
             key={i}
             onClick={() => handleKeyBoardInput(letter)}
+            style={{ backgroundColor: keyColour(letter, allResults) }}
           >
             {letter}
           </button>
