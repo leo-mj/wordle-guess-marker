@@ -6,7 +6,9 @@ export function Login({ states }: PropsMainPages): JSX.Element {
   const { setSelectedPage, user, setUser, password, setPassword, setLoggedIn } =
     states;
   const handleLoginButton = async () => {
-    alert("The server might take a few seconds to wake up");
+    alert(
+      "Sorry to make you wait, the server might take a few seconds to wake up."
+    );
     try {
       const response = await axios.get(`${baseURL}login/${user}/${password}`);
       if (response.data.status === "success") {

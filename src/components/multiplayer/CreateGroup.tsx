@@ -44,6 +44,11 @@ export function CreateGroup({
         value={groupPasscode}
         onChange={(e) => setGroupPasscode(e.target.value)}
         placeholder="group passcode"
+        onKeyDown={(event) => {
+          if (event.key === "Enter") {
+            handleCreateButton();
+          }
+        }}
       />
       <button onClick={() => handleCreateButton()}>Create</button>
     </div>
