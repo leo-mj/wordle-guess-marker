@@ -1,8 +1,10 @@
 import axios from "axios";
+import { useState } from "react";
 import { arrangeEmojis } from "../../utils/arrangeEmojis";
 import { baseURL } from "../../utils/databaseURL";
 import { StateVariables } from "../../utils/menu-interfaces";
-import { Group } from "../../utils/multiplayer-interfaces";
+import { Group, GroupStats } from "../../utils/multiplayer-interfaces";
+import { OneGroupStats } from "./OneGroupStats";
 
 interface PropsAllGroups {
   states: StateVariables;
@@ -16,6 +18,18 @@ export function OneGroup({
   setLeaveGroup,
 }: PropsAllGroups): JSX.Element {
   const { user, password } = states;
+  const [show, setShow] = useState<boolean>(false);
+  const [groupStats, setGroupStats] = useState<GroupStats[] | null>(null);
+  const handleClose = () => setShow(false);
+  const handleShow = async () => {
+    const groupStatsData = (
+      await axios.get(
+        baseURL + `groups/${group.groupName}/stats/${user}/${password}`
+      )
+    ).data;
+    setGroupStats(groupStatsData);
+    setShow(true);
+  };
 
   const handleLeaveGroup = async () => {
     try {
@@ -32,25 +46,35 @@ export function OneGroup({
   return (
     <div className="one-group">
       <h2>{group.groupName}</h2>
-      <div className="all-entries">
-        {group.groupEntries.map((entry, i) => (
-          <div className="group-entry" key={i}>
-            <div className="group-entry-description">
-              <b>{entry.username}</b>
-              <p>{entry.solved_status}</p>
-              <p>{entry.guesses}/6 attempts</p>
+      {!show && (
+        <div className="all-entries">
+          {group.groupEntries.map((entry, i) => (
+            <div className="group-entry" key={i}>
+              <div className="group-entry-description">
+                <b>{entry.username}</b>
+                <p>{entry.solved_status}</p>
+                <p>{entry.guesses}/6 attempts</p>
+              </div>
+              <div className="group-entry-emojis">
+                {arrangeEmojis(entry.emojis).map((emojiRow, i) => (
+                  <div key={i}>{emojiRow}</div>
+                ))}
+              </div>
             </div>
-            <div className="group-entry-emojis">
-              {arrangeEmojis(entry.emojis).map((emojiRow, i) => (
-                <div key={i}>{emojiRow}</div>
-              ))}
-            </div>
+          ))}
+          <button onClick={handleShow}>Group Stats</button>
+        </div>
+      )}
+
+      {show && groupStats && (
+        <div className="all-entries">
+          <OneGroupStats groupStats={groupStats} />
+          <div className="group-stat-buttons">
+            <button onClick={handleClose}>Close</button>
+            <button onClick={handleLeaveGroup}>Leave Group</button>
           </div>
-        ))}
-        <button className="group-button" onClick={handleLeaveGroup}>
-          Leave
-        </button>
-      </div>
+        </div>
+      )}
     </div>
   );
 }

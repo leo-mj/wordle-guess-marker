@@ -39,6 +39,11 @@ export function JoinGroup({
         value={groupPasscode}
         onChange={(e) => setGroupPasscode(e.target.value)}
         placeholder="group passcode"
+        onKeyDown={(event) => {
+          if (event.key === "Enter") {
+            handleJoinButton();
+          }
+        }}
       />
       <button onClick={() => handleJoinButton()}>Join</button>
     </div>
