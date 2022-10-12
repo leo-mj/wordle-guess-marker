@@ -23,4 +23,5 @@ export interface GroupStats {
   total_games: number;
   games_solved: number;
   solved_percentage: number;
+  points: number;
 }
