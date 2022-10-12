@@ -62,7 +62,7 @@ export function OneGroup({
               </div>
             </div>
           ))}
-          <button onClick={handleShow}>Group Stats</button>
+          <button onClick={handleShow}>Leaderboard</button>
         </div>
       )}
 
