@@ -68,7 +68,7 @@ export function OneGroup({
 
       {show && groupStats && (
         <div className="all-entries">
-          <OneGroupStats groupStats={groupStats} />
+          <OneGroupStats groupStats={groupStats} user={user} />
           <div className="group-stat-buttons">
             <button onClick={handleClose}>Close</button>
             <button onClick={handleLeaveGroup}>Leave Group</button>
