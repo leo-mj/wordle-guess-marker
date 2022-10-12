@@ -11,4 +11,41 @@
   border: 5px solid #eb5e28;
   border-radius: 3px;
   box-shadow: 3px 3px #2b2d42;
+  text-align: center;
+}
+
+@media only screen and (max-width: 1200px) {
+  .about {
+    width: 80%;
+    font-size: 400%;
+  }
+}
+
+.about-section {
+  display: flex;
+  flex-direction: column;
+  border: 2px salmon solid;
+  border-radius: 3px;
+  box-shadow: 3px 3px #3d5a80;
+  margin: 2% 1% 2% 1%;
+  padding: 2% 5% 2% 5%;
+  color: #2b2d42;
+  background-color: white;
+  align-items: center;
+  text-align: justify;
+
+  p {
+    margin-bottom: 0%;
+  }
+
+  button {
+    font-size: 100%;
+    color: white;
+    background-color: #2b2d42;
+    border: 5px solid #eb5e28;
+    border-radius: 3px;
+    box-shadow: 3px 3px #2b2d42;
+    margin: 3% 3% 3% 3%;
+    justify-self: center;
+  }
 }

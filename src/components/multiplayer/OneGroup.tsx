@@ -3,7 +3,7 @@ import { useState } from "react";
 import { arrangeEmojis } from "../../utils/arrangeEmojis";
 import { baseURL } from "../../utils/databaseURL";
 import { StateVariables } from "../../utils/menu-interfaces";
-import { Group, GroupStats } from "../../utils/multiplayer-interfaces";
+import { Group, Stats } from "../../utils/multiplayer-interfaces";
 import { OneGroupStats } from "./OneGroupStats";
 
 interface PropsAllGroups {
@@ -19,7 +19,7 @@ export function OneGroup({
 }: PropsAllGroups): JSX.Element {
   const { user, password } = states;
   const [show, setShow] = useState<boolean>(false);
-  const [groupStats, setGroupStats] = useState<GroupStats[] | null>(null);
+  const [groupStats, setGroupStats] = useState<Stats[] | null>(null);
   const handleClose = () => setShow(false);
   const handleShow = async () => {
     const groupStatsData = (
@@ -62,7 +62,7 @@ export function OneGroup({
               </div>
             </div>
           ))}
-          <button onClick={handleShow}>Group Stats</button>
+          <button onClick={handleShow}>Leaderboard</button>
         </div>
       )}
 

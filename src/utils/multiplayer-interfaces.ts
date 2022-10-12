@@ -17,7 +17,7 @@ export interface PropsMultiplayerPages {
   setMultiplayerPage: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export interface GroupStats {
+export interface Stats {
   username: string;
   avg_guesses: number;
   total_games: number;

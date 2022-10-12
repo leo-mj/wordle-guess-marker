@@ -6,6 +6,8 @@ import { Register } from "./components/register-or-login/Register";
 import { StateVariables } from "./utils/menu-interfaces";
 import "./scss/mystyles.scss";
 import { ManageAccount } from "./components/ManageAccount";
+import { About } from "./components/About";
+import { MenuButtons } from "./components/MenuButtons";
 
 function App(): JSX.Element {
   const [selectedPage, setSelectedPage] = useState<string>("main menu");
@@ -24,69 +26,7 @@ function App(): JSX.Element {
   };
   return (
     <>
-      <div className="menu-buttons">
-        {selectedPage !== "play" && (
-          <button
-            className="menu-button"
-            onClick={() => setSelectedPage("play")}
-          >
-            Play
-          </button>
-        )}
-        {selectedPage !== ("login" || "register") && !loggedIn && (
-          <button
-            className="menu-button"
-            onClick={() => setSelectedPage("login")}
-          >
-            Log In
-          </button>
-        )}
-        {selectedPage === "main menu" && !loggedIn && (
-          <button
-            className="menu-button"
-            onClick={() => setSelectedPage("register")}
-          >
-            Register
-          </button>
-        )}
-        {selectedPage !== ("register" || "login") && loggedIn && (
-          <button
-            className="menu-button"
-            onClick={() => {
-              setLoggedIn(false);
-              setUser("");
-              setPassword("");
-              setSelectedPage("main menu");
-            }}
-          >
-            Log Out
-          </button>
-        )}
-        {selectedPage !== "main menu" && !loggedIn && (
-          <button
-            className="menu-button"
-            onClick={() => setSelectedPage("main menu")}
-          >
-            Main Menu
-          </button>
-        )}
-        {selectedPage !== "multiplayer" && loggedIn && (
-          <button
-            className="menu-button"
-            onClick={() => setSelectedPage("multiplayer")}
-          >
-            Multiplayer
-          </button>
-        )}
-        {loggedIn && selectedPage !== "manage account" && (
-          <button
-            className="menu-button"
-            onClick={() => setSelectedPage("manage account")}
-          >
-            Account
-          </button>
-        )}
-      </div>
+      <MenuButtons states={states} />
       {selectedPage === "play" && <PlayWordle states={states} />}
       {selectedPage === "login" && <Login states={states} />}
       {selectedPage === "register" && <Register states={states} />}
@@ -95,18 +35,7 @@ function App(): JSX.Element {
         <ManageAccount states={states} />
       )}
       {selectedPage === "main menu" && !loggedIn && (
-        <div className="about">
-          <i>Play:</i>
-          <p> Play a game of Wordle without saving your results anywhere</p>
-          <i>Login:</i>
-          <p>
-            {" "}
-            Once you are logged in, you can join groups and share your results
-            with others!
-          </p>
-          <i>Register:</i>
-          <p> Create an account so you can use the multiplayer features!</p>
-        </div>
+        <About setSelectedPage={setSelectedPage} />
       )}
     </>
   );
