@@ -1,7 +1,7 @@
-import { GroupStats } from "../../utils/multiplayer-interfaces";
+import { Stats } from "../../utils/multiplayer-interfaces";
 
 interface IPropsGroupStats {
-  groupStats: GroupStats[];
+  groupStats: Stats[];
   user: string;
 }
 
