@@ -26,8 +26,9 @@
   border-radius: 3px;
   box-shadow: 3px 3px #3d5a80;
   font-size: xx-large;
-  margin: 2% 10% 2% 10%;
-  padding: 2% 10% 2% 10%;
+  margin: 2% 5% 2% 5%;
+  box-sizing: content-box;
+  padding: 2% 5% 2% 5%;
   text-align: end;
 
   h2 {
@@ -57,9 +58,12 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 100%;
+  box-sizing: border-box;
 
   table {
-    width: 150%;
+    table-layout: auto;
+    width: 100%;
   }
   table,
   th,
@@ -69,6 +73,7 @@
     box-shadow: 3px 3px #3d5a80;
     padding: 1% 1.5% 1% 1.5%;
     text-align: center;
+    box-sizing: border-box;
   }
   th {
     color: white;
