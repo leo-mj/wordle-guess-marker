@@ -4,12 +4,12 @@
   border: 5px solid #eb5e28;
   border-radius: 3px;
   box-shadow: 3px 3px black;
-  margin: 2% 5% 2% 5%;
-  padding: 2% 5% 2% 5%;
+  margin: 0% 35% 0% 35%;
+  padding: 0.5%;
   background-color: #8d99ae;
 
   input {
-    font-size: xxx-large;
+    font-size: large;
     text-align: center;
     margin-right: 2%;
     color: white;
@@ -17,10 +17,11 @@
     border: 5px solid white;
     border-radius: 3px;
     box-shadow: 3px 3px #eb5e28;
+    width: 80%;
   }
 
   button {
-    font-size: xxx-large;
+    font-size: large;
     color: white;
     background-color: #2b2d42;
     border: 5px solid white;
@@ -30,19 +31,5 @@
 
   button:hover {
     box-shadow: 4px 4px #e0fbfc;
-  }
-}
-
-@media screen and (min-width: 1200px) {
-  .inputFields {
-    margin: 0% 35% 0% 35%;
-    padding: 0.5%;
-    input,
-    button {
-      font-size: large;
-    }
-    input {
-      width: 80%;
-    }
   }
 }
