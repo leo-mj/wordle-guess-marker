@@ -6,5 +6,5 @@ export async function getTodaysSolution(
   todaysDate: string
 ): Promise<void> {
   const res = await axios.get(baseURL + "solution/" + todaysDate);
-  setTodaysSolution(res.data.solution);
+  setTodaysSolution(res.data.word);
 }
