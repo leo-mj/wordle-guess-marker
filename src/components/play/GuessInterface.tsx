@@ -26,6 +26,22 @@ export function GuessInterface({
 
   const [allResults, setAllResults] = useState<MarkedGuess[]>([]);
 
+  const getWindowSize = () => {
+    const { innerWidth, innerHeight } = window;
+    return { innerWidth, innerHeight };
+  };
+  const [windowSize, setWindowSize] = useState(getWindowSize());
+
+  useEffect(() => {
+    function handleWindowResize() {
+      setWindowSize(getWindowSize());
+    }
+    window.addEventListener("resize", handleWindowResize);
+    return () => {
+      window.removeEventListener("resize", handleWindowResize);
+    };
+  }, [windowSize]);
+
   useEffect(() => {
     if (allResults && solvedStatus === "solving") {
       checkSolvedStatus(allResults, setSolvedStatus);
@@ -42,7 +58,7 @@ export function GuessInterface({
 
   return (
     <>
-      {solvedStatus === "solving" && (
+      {solvedStatus === "solving" && windowSize.innerWidth > 1200 && (
         <>
           <div className="inputFields">
             <input
@@ -76,7 +92,7 @@ export function GuessInterface({
                 )
               }
               style={{
-                boxShadow: guessInput.length === 5 ? "7px 7px #e0fbfc" : "",
+                boxShadow: guessInput.length === 5 ? "4px 4px #e0fbfc" : "",
               }}
             >
               ↩

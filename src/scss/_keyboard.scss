@@ -31,3 +31,15 @@
 .key:hover {
   box-shadow: 4px 4px #e0fbfc;
 }
+
+@media screen and (min-width: 1200px) {
+  #keyboard {
+    margin: 0% 30% 0% 30%;
+  }
+
+  .key {
+    font-size: large;
+    margin: 0.3%;
+    padding: 2%;
+  }
+}

@@ -8,12 +8,14 @@
   background-color: #8d99ae;
 }
 
-.allRows {
-  display: grid;
-  grid-template-columns: 18% 18% 18% 18% 18%;
-  grid-column-gap: 1%;
-  text-align: center;
-  justify-content: center;
+@media screen and (max-width: 1200px) {
+  .allRows {
+    display: grid;
+    grid-template-columns: 18% 18% 18% 18% 18%;
+    grid-column-gap: 1%;
+    text-align: center;
+    justify-content: center;
+  }
 }
 
 .letter {
@@ -40,4 +42,36 @@
 .emoji-row {
   display: flex;
   flex-wrap: wrap;
+}
+
+@media screen and (min-width: 1200px) {
+  .guessDisplay {
+    margin: 0.4% 30% 0.4% 30%;
+    padding-top: 0.1%;
+    padding-bottom: 0.2%;
+  }
+  .allRows {
+    display: grid;
+    grid-template-columns: 10% 10% 10% 10% 10%;
+    grid-column-gap: 0.5%;
+    text-align: center;
+    justify-content: center;
+  }
+
+  .letter {
+    margin: 3% 1% 3% 1%;
+    font-size: large;
+    h1 {
+      font-size: x-large;
+    }
+  }
+
+  .shared-result {
+    font-size: large;
+    h3,
+    p {
+      font-size: x-large;
+      margin: 1%;
+    }
+  }
 }
