@@ -16,3 +16,10 @@
 .menu-button:hover {
   box-shadow: 4px 4px #3d5a80;
 }
+
+@media screen and (min-width: 1200px) {
+  .menu-button {
+    font-size: large;
+    margin: 0.2%;
+  }
+}
