@@ -92,7 +92,7 @@ export function GuessInterface({
                 )
               }
               style={{
-                boxShadow: guessInput.length === 5 ? "7px 7px #e0fbfc" : "",
+                boxShadow: guessInput.length === 5 ? "4px 4px #e0fbfc" : "",
               }}
             >
               ↩
