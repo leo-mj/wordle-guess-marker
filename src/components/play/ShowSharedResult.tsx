@@ -1,4 +1,5 @@
 import { SharedResult } from "../../utils/game-interfaces";
+import { getTodaysDate } from "../../utils/playUtils/getTodaysDate";
 
 interface PropsShowSharedResult {
   sharedResult: SharedResult;
@@ -10,6 +11,16 @@ export function ShowSharedResult({
   todaysSolution,
 }: PropsShowSharedResult): JSX.Element {
   const { guesses, solvedStatus, emojis } = sharedResult;
+
+  const handleShareButton = () => {
+    const emojiRowsAsStringsArray: string[] = emojis.map((row) => row.join(""));
+    const emojiBlock: string = emojiRowsAsStringsArray.flat().join("\n");
+    console.log(emojiBlock);
+    const shareText = `Wordle Clone Multiplayer ${guesses}/6\n${getTodaysDate()}\n${emojiBlock}`;
+    console.log(shareText);
+    navigator.clipboard.writeText(shareText);
+  };
+
   return (
     <div className="shared-result">
       {solvedStatus === "solved" ? (
@@ -18,7 +29,7 @@ export function ShowSharedResult({
         <h3>Aww! The solution was: {todaysSolution.toUpperCase()}</h3>
       )}
       <p>{guesses}/6 attempts</p>
-      <div className="all emojis">
+      <div className="all-emojis">
         {emojis.map((emojiRow, i) => (
           <div className="emoji-row" key={i}>
             {emojiRow.map((emoji, j) => (
@@ -29,6 +40,9 @@ export function ShowSharedResult({
           </div>
         ))}
       </div>
+      <button className="group-button" onClick={handleShareButton}>
+        Share
+      </button>
     </div>
   );
 }
