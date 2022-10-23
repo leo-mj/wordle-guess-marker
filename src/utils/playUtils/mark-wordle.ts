@@ -1,7 +1,13 @@
 /*Write a function, `markWordleGuess(guess: string, hiddenTarget: string):MarkedGuess` 
 which calculates the correctness hints for each letter of a given single guess in Wordle based on the given hidden target.
 Assume that the strings guess and hiddenTarget are always formed of exactly 5 upper-case alphabet characters (often with repeats).*/
-import { green, grey, MarkedGuess, yellow } from "../game-interfaces";
+import {
+  green,
+  grey,
+  LettersWithIndices,
+  MarkedGuess,
+  yellow,
+} from "../game-interfaces";
 
 /**
  * returns a marked wordle guess
@@ -9,81 +15,110 @@ import { green, grey, MarkedGuess, yellow } from "../game-interfaces";
  * @param {string} inputHiddenTarget - the 5-letter solution to check the guess against
  * @returns the marked guess
  */
-function markWordle(
+export default function markWordle(
   inputGuess: string,
   inputHiddenTarget: string
 ): MarkedGuess {
-  const guess: string = inputGuess.toUpperCase();
-  const hiddenTarget = inputHiddenTarget.toUpperCase();
-  let result: MarkedGuess = markIgnoringRepetition(guess, hiddenTarget);
-
-  result = removeExtraYellows(result, guess, hiddenTarget);
+  const guess = inputGuess.toUpperCase();
+  const target = inputHiddenTarget.toUpperCase();
+  const guessLettersWithIndices = assignIndicesToLetters(guess);
+  const targetLettersWithIndices = assignIndicesToLetters(target);
+  const result: MarkedGuess = compareGuessAndTarget(
+    guessLettersWithIndices,
+    targetLettersWithIndices
+  );
 
   return result;
 }
 
-function markIgnoringRepetition(
-  guess: string,
-  hiddenTarget: string
-): MarkedGuess {
-  const result: MarkedGuess = { 0: { letter: guess[0], colour: grey } };
+function assignIndicesToLetters(inputStr: string): LettersWithIndices {
+  const obj: LettersWithIndices = {};
   for (let i = 0; i < 5; i++) {
-    const guessLetter: string = guess[i];
-    const targetLetter: string = hiddenTarget[i];
-    if (guessLetter === targetLetter)
-      result[i] = { letter: guessLetter, colour: green };
-    else if (hiddenTarget.includes(guessLetter)) {
-      result[i] = { letter: guessLetter, colour: yellow };
+    const letter: string = inputStr[i];
+    if (obj[letter]) {
+      obj[letter].push(i);
     } else {
-      result[i] = { letter: guessLetter, colour: grey };
+      obj[letter] = [i];
     }
   }
+  return obj;
+}
+
+function compareGuessAndTarget(
+  guess: LettersWithIndices,
+  target: LettersWithIndices
+): MarkedGuess {
+  const result: MarkedGuess = {};
+
+  for (const letter in guess) {
+    markGreens(letter, guess, target, result);
+    markYellows(letter, guess, target, result);
+    markGreys(letter, guess, target, result);
+  }
+
   return result;
 }
 
-function removeExtraYellows(
-  resultSoFar: MarkedGuess,
-  guess: string,
-  hiddenTarget: string
-): MarkedGuess {
-  const modifiedResult: MarkedGuess = resultSoFar;
-  // remove excess yellows of the duplicate letter from markedResult, starting from the back, replace with grey
-  for (let i = 4; i >= 0; i--) {
-    if (isDuplicateYellow(modifiedResult, guess, hiddenTarget, i)) {
-      modifiedResult[i].colour = grey;
+function markGreens(
+  letter: string,
+  guess: LettersWithIndices,
+  target: LettersWithIndices,
+  result: MarkedGuess
+): void {
+  const originalTargetIndices = target[letter];
+  const originalGuessIndices = guess[letter];
+
+  for (const index of originalGuessIndices) {
+    if (originalTargetIndices && originalTargetIndices.includes(index)) {
+      result[index] = { letter: letter, colour: green };
     }
   }
-  return modifiedResult;
+
+  // remove all matching indices from both LettersWithIndices objects
+  guess[letter] = originalGuessIndices?.filter(
+    (guessIndex) => !originalTargetIndices?.includes(guessIndex)
+  );
+  target[letter] = target[letter]?.filter(
+    (targetIndex) => !originalGuessIndices?.includes(targetIndex)
+  );
 }
 
-function isDuplicateYellow(
-  resultSoFar: MarkedGuess,
-  guess: string,
-  hiddenTarget: string,
-  i: number
-): boolean {
-  const guessLetter = guess[i];
-  if (!(resultSoFar[i].colour === yellow)) {
-    return false;
+function markYellows(
+  letter: string,
+  guess: LettersWithIndices,
+  target: LettersWithIndices,
+  result: MarkedGuess
+): void {
+  // treat the arrays of indices as queues here
+  const guessIndices = guess[letter];
+  const targetIndices = target[letter];
+
+  while (
+    guessIndices &&
+    guessIndices.length > 0 &&
+    targetIndices &&
+    targetIndices.length > 0
+  ) {
+    const index = guessIndices[0];
+    result[index] = { letter: letter, colour: yellow };
+
+    // remove front of queue
+    guessIndices.shift();
+    targetIndices.shift();
   }
-  const letterInGuess = countLetter(guessLetter, guess);
-  const letterInTarget = countLetter(guessLetter, hiddenTarget);
-  const excessYellows = letterInGuess - letterInTarget;
-  if (excessYellows > 0) {
-    return true;
-  }
-  return false;
 }
 
-function countLetter(letter: string, searchWord: string): number {
-  const regexp = new RegExp(letter, "g");
-  let letterCount = 0;
-  const letterArray: string[] | null = searchWord.match(regexp);
-  if (letterArray !== null) {
-    // this line is to avoid a TS error regarding length of null
-    letterCount = letterArray.length;
+function markGreys(
+  letter: string,
+  guess: LettersWithIndices,
+  target: LettersWithIndices,
+  result: MarkedGuess
+): void {
+  const guessIndices = guess[letter];
+  if (!guessIndices) {
+    return;
   }
-  return letterCount;
+  for (const index of guessIndices) {
+    result[index] = { letter: letter, colour: grey };
+  }
 }
-
-export default markWordle;

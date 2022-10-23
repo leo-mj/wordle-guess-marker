@@ -2,6 +2,10 @@ export interface MarkedGuess {
   [index: number]: { letter: string; colour: string };
 }
 
+export interface LettersWithIndices {
+  [letter: string]: number[];
+}
+
 export interface LetterWithColour {
   letter: string;
   colour: string;
