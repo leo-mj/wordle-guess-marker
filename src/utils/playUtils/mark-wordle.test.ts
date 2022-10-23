@@ -36,6 +36,13 @@ test("markWordle returns correct yellow mark for guess and hiddenTarget with rep
     3: { letter: "E", colour: yellow },
     4: { letter: "T", colour: grey },
   });
+  expect(markWordle("flurr", "eerie")).toStrictEqual({
+    0: { letter: "F", colour: grey },
+    1: { letter: "L", colour: grey },
+    2: { letter: "U", colour: grey },
+    3: { letter: "R", colour: yellow },
+    4: { letter: "R", colour: grey },
+  });
 });
 
 test("markWordle returns correct yellow and green mark for guess and hiddenTarget with repetition", () => {
