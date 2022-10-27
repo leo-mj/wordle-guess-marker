@@ -15,9 +15,7 @@ export function ShowSharedResult({
   const handleShareButton = () => {
     const emojiRowsAsStringsArray: string[] = emojis.map((row) => row.join(""));
     const emojiBlock: string = emojiRowsAsStringsArray.flat().join("\n");
-    console.log(emojiBlock);
     const shareText = `Wordle Clone Multiplayer ${guesses}/6\n${getTodaysDate()}\n${emojiBlock}`;
-    console.log(shareText);
     navigator.clipboard.writeText(shareText);
   };
 

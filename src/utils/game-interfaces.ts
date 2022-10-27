@@ -12,7 +12,7 @@ export interface LetterWithColour {
 }
 
 export const green = "#6a994e";
-export const yellow = "#ffbe0b";
+export const yellow = "#ee9b00";
 export const grey = "grey";
 
 export interface SharedResult {

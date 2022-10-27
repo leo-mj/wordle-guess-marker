@@ -113,7 +113,7 @@ export function GuessInterface({
         <ShowAllResults allResults={allResults} guessInput={guessInput} />
       </div>
 
-      {solvedStatus === "solving" && (
+     
         <div className="keyboard">
           <Keyboard
             guessInput={guessInput}
@@ -123,7 +123,6 @@ export function GuessInterface({
             todaysSolution={todaysSolution}
           />
         </div>
-      )}
     </>
   );
 }

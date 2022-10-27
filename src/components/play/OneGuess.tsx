@@ -15,7 +15,7 @@ export function OneGuess({ result }: PropsOneGuess): JSX.Element {
         <div
           key={i}
           className="letter"
-          style={{ backgroundColor: result.colour }}
+          style={{ backgroundColor: result.colour, color:"white" }}
         >
           <h1>{result.letter}</h1>
         </div>
