@@ -26,7 +26,6 @@ function App(): JSX.Element {
   };
   return (
     <>
-      Sorry, the server is undergoing maintenance at the moment.
       <MenuButtons states={states} />
       {selectedPage === "play" && <PlayWordle states={states} />}
       {selectedPage === "login" && <Login states={states} />}
