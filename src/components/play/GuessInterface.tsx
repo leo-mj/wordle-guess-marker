@@ -113,16 +113,15 @@ export function GuessInterface({
         <ShowAllResults allResults={allResults} guessInput={guessInput} />
       </div>
 
-     
-        <div className="keyboard">
-          <Keyboard
-            guessInput={guessInput}
-            setGuessInput={setGuessInput}
-            allResults={allResults}
-            setAllResults={setAllResults}
-            todaysSolution={todaysSolution}
-          />
-        </div>
+      <div className="keyboard">
+        <Keyboard
+          guessInput={guessInput}
+          setGuessInput={setGuessInput}
+          allResults={allResults}
+          setAllResults={setAllResults}
+          todaysSolution={todaysSolution}
+        />
+      </div>
     </>
   );
 }
