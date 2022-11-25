@@ -1,4 +1,4 @@
 export const baseURL =
   process.env.NODE_ENV === "production"
-    ? "https://lm-wordle-platform.herokuapp.com/"
+    ? "https://wordle-clone-backend.onrender.com/"
     : "http://localhost:4000/";
