@@ -9,10 +9,17 @@ export function MenuButtons({ states }: PropsMainPages): JSX.Element {
     setUser,
     setPassword,
   } = states;
+
+  const handlePlayButton = () => {
+    setSelectedPage("play");
+    if (!loggedIn) {
+      alert("Please give the server a short moment to wake up");
+    }
+  };
   return (
     <div className="menu-buttons">
       {selectedPage !== "play" && (
-        <button className="menu-button" onClick={() => setSelectedPage("play")}>
+        <button className="menu-button" onClick={handlePlayButton}>
           Play
         </button>
       )}
