@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Multiplayer } from "./components/Multiplayer";
 import { PlayWordle } from "./components/PlayWordle";
 import { Login } from "./components/register-or-login/Login";
@@ -8,6 +8,8 @@ import "./scss/mystyles.scss";
 import { ManageAccount } from "./components/ManageAccount";
 import { About } from "./components/About";
 import { MenuButtons } from "./components/MenuButtons";
+import axios from "axios";
+import { baseURL } from "./utils/databaseURL";
 
 function App(): JSX.Element {
   const [selectedPage, setSelectedPage] = useState<string>("main menu");
@@ -24,6 +26,10 @@ function App(): JSX.Element {
     loggedIn: loggedIn,
     setLoggedIn: setLoggedIn,
   };
+  useEffect(() => {
+    axios.get(baseURL);
+    console.log("Connecting to server");
+  }, []);
   return (
     <>
       <MenuButtons states={states} />
