@@ -13,7 +13,9 @@ export function MenuButtons({ states }: PropsMainPages): JSX.Element {
   const handlePlayButton = () => {
     setSelectedPage("play");
     if (!loggedIn) {
-      alert("Please give the server a short moment to wake up");
+      alert(
+        "Sorry to make you wait, the server might take a few seconds to wake up."
+      );
     }
   };
   return (
