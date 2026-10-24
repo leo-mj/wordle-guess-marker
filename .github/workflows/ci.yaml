@@ -23,3 +23,6 @@ jobs:
       run: yarn test
     - name: Check app builds
       run: yarn build
+      env:
+        # react-scripts 4 builds with webpack 4, whose MD4 hashing needs OpenSSL's legacy provider on Node 17+
+        NODE_OPTIONS: --openssl-legacy-provider
