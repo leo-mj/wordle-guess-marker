@@ -1,3 +1,5 @@
+import axios from "axios";
+import { authHeader, baseURL } from "../utils/databaseURL";
 import { PropsMainPages } from "../utils/menu-interfaces";
 
 export function MenuButtons({ states }: PropsMainPages): JSX.Element {
@@ -8,20 +10,25 @@ export function MenuButtons({ states }: PropsMainPages): JSX.Element {
     setLoggedIn,
     setUser,
     setPassword,
+    token,
+    setToken,
   } = states;
 
-  const handlePlayButton = () => {
-    setSelectedPage("play");
-    if (!loggedIn) {
-      alert(
-        "Sorry to make you wait, the server might take a few seconds to wake up."
-      );
-    }
+  const handleLogOutButton = () => {
+    // ends the session on the server; the user is logged out locally even if this fails
+    axios
+      .post(baseURL + "logout", {}, authHeader(token))
+      .catch((error) => console.error(error));
+    setLoggedIn(false);
+    setUser("");
+    setPassword("");
+    setToken("");
+    setSelectedPage("main menu");
   };
   return (
     <div className="menu-buttons">
       {selectedPage !== "play" && (
-        <button className="menu-button" onClick={handlePlayButton}>
+        <button className="menu-button" onClick={() => setSelectedPage("play")}>
           Play
         </button>
       )}
@@ -42,15 +49,7 @@ export function MenuButtons({ states }: PropsMainPages): JSX.Element {
         </button>
       )}
       {selectedPage !== ("register" || "login") && loggedIn && (
-        <button
-          className="menu-button"
-          onClick={() => {
-            setLoggedIn(false);
-            setUser("");
-            setPassword("");
-            setSelectedPage("main menu");
-          }}
-        >
+        <button className="menu-button" onClick={handleLogOutButton}>
           Log Out
         </button>
       )}

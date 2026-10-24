@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { arrangeEmojis } from "../../utils/arrangeEmojis";
-import { baseURL } from "../../utils/databaseURL";
+import { authHeader, baseURL } from "../../utils/databaseURL";
 import { StateVariables } from "../../utils/menu-interfaces";
 import { Group, Stats } from "../../utils/multiplayer-interfaces";
 import { OneGroupStats } from "./OneGroupStats";
@@ -17,14 +17,15 @@ export function OneGroup({
   states,
   setLeaveGroup,
 }: PropsAllGroups): JSX.Element {
-  const { user, password } = states;
+  const { user, token } = states;
   const [show, setShow] = useState<boolean>(false);
   const [groupStats, setGroupStats] = useState<Stats[] | null>(null);
   const handleClose = () => setShow(false);
   const handleShow = async () => {
     const groupStatsData = (
       await axios.get(
-        baseURL + `groups/${group.groupName}/stats/${user}/${password}`
+        baseURL + `groups/${group.groupName}/stats`,
+        authHeader(token)
       )
     ).data;
     setGroupStats(groupStatsData);
@@ -34,7 +35,8 @@ export function OneGroup({
   const handleLeaveGroup = async () => {
     try {
       await axios.delete(
-        baseURL + `groups/exit/${group.groupName}/${user}/${password}`
+        baseURL + `groups/exit/${group.groupName}`,
+        authHeader(token)
       );
       alert(`You have left ${group.groupName}`);
       setLeaveGroup(group.groupName);

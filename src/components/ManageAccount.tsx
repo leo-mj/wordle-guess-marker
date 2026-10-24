@@ -1,19 +1,21 @@
 import axios from "axios";
 import { useState } from "react";
-import { baseURL } from "../utils/databaseURL";
+import { authHeader, baseURL } from "../utils/databaseURL";
 import { PropsMainPages } from "../utils/menu-interfaces";
 import { PlayerStats } from "./PlayerStats";
 
 export function ManageAccount({ states }: PropsMainPages): JSX.Element {
-  const { user, password, setLoggedIn } = states;
+  const { setUser, token, setToken, setLoggedIn } = states;
   const [deleteConfirmation, setDeleteConfirmation] = useState<boolean>(false);
   const [showStats, setShowStats] = useState<boolean>(false);
 
   const handleDeleteButton = async () => {
     try {
-      await axios.delete(baseURL + `delete/${user}/${password}`);
+      await axios.delete(baseURL + "account", authHeader(token));
       alert("You have deleted your account");
       setLoggedIn(false);
+      setUser("");
+      setToken("");
     } catch (error) {
       console.error(error);
       alert("Something went wrong. Try again");
@@ -28,11 +30,7 @@ export function ManageAccount({ states }: PropsMainPages): JSX.Element {
       )}
       {showStats && (
         <div className="one-group">
-          <PlayerStats
-            user={user}
-            password={password}
-            setShowStats={setShowStats}
-          />
+          <PlayerStats token={token} setShowStats={setShowStats} />
         </div>
       )}
 

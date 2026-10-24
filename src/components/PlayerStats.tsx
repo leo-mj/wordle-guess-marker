@@ -1,18 +1,16 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { arrangeEmojis } from "../utils/arrangeEmojis";
-import { baseURL } from "../utils/databaseURL";
+import { authHeader, baseURL } from "../utils/databaseURL";
 import { GroupEntry, Stats } from "../utils/multiplayer-interfaces";
 
 interface IPlayerStatsProps {
-  user: string;
-  password: string;
+  token: string;
   setShowStats: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export function PlayerStats({
-  user,
-  password,
+  token,
   setShowStats,
 }: IPlayerStatsProps): JSX.Element {
   const [stats, setStats] = useState<Stats | null>(null);
@@ -20,9 +18,10 @@ export function PlayerStats({
 
   useEffect(() => {
     const loadStatsAndHistory = async () => {
-      const res = (await axios.get(baseURL + `users/stats/${user}/${password}`))
+      const res = (await axios.get(baseURL + "users/stats", authHeader(token)))
         .data;
-      setStats(res.stats[0]);
+      // stats is empty until the user has played a game
+      setStats(res.stats[0] ?? null);
       setHistory(res.history);
     };
     try {
@@ -30,7 +29,7 @@ export function PlayerStats({
     } catch (error) {
       console.error(error);
     }
-  }, [password, user]);
+  }, [token]);
 
   return (
     <>

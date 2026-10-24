@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { baseURL } from "../utils/databaseURL";
+import { authHeader, baseURL } from "../utils/databaseURL";
 import { PropsMainPages } from "../utils/menu-interfaces";
 import { Group } from "../utils/multiplayer-interfaces";
 import { getTodaysDate } from "../utils/playUtils/getTodaysDate";
@@ -9,7 +9,7 @@ import { CreateGroup } from "./multiplayer/CreateGroup";
 import { JoinGroup } from "./multiplayer/JoinGroup";
 
 export function Multiplayer({ states }: PropsMainPages): JSX.Element {
-  const { user, password, loggedIn } = states;
+  const { token, loggedIn } = states;
   const [multiplayerPage, setMultiplayerPage] = useState<string>("all groups");
 
   const todaysDate = getTodaysDate();
@@ -20,7 +20,8 @@ export function Multiplayer({ states }: PropsMainPages): JSX.Element {
     const getGroups = async () => {
       try {
         const allMyGroups = await axios.get(
-          baseURL + "groups/results/" + user + "/" + todaysDate
+          baseURL + "groups/results/" + todaysDate,
+          authHeader(token)
         );
         setMyGroups([...allMyGroups.data]);
       } catch (err) {
@@ -28,7 +29,7 @@ export function Multiplayer({ states }: PropsMainPages): JSX.Element {
       }
     };
     getGroups();
-  }, [password, todaysDate, user, multiplayerPage, leaveGroup]);
+  }, [token, todaysDate, multiplayerPage, leaveGroup]);
 
   return (
     <>

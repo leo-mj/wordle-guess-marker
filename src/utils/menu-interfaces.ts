@@ -5,6 +5,8 @@ export interface StateVariables {
   setUser: React.Dispatch<React.SetStateAction<string>>;
   password: string;
   setPassword: React.Dispatch<React.SetStateAction<string>>;
+  token: string;
+  setToken: React.Dispatch<React.SetStateAction<string>>;
   loggedIn: boolean;
   setLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
 }

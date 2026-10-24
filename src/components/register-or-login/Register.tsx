@@ -3,15 +3,24 @@ import { baseURL } from "../../utils/databaseURL";
 import { PropsMainPages } from "../../utils/menu-interfaces";
 
 export function Register({ states }: PropsMainPages): JSX.Element {
-  const { setSelectedPage, user, setUser, password, setPassword, setLoggedIn } =
-    states;
+  const {
+    setSelectedPage,
+    user,
+    setUser,
+    password,
+    setPassword,
+    setToken,
+    setLoggedIn,
+  } = states;
   const handleRegisterButton = async () => {
     try {
-      await axios.post(baseURL + "register", {
+      const response = await axios.post(baseURL + "register", {
         user: user,
         password: password,
       });
       alert("Success!");
+      setToken(response.data.token);
+      setPassword("");
       setLoggedIn(true);
       setSelectedPage("play");
     } catch (err) {

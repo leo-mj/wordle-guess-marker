@@ -1,22 +1,22 @@
 import axios from "axios";
 import { useState } from "react";
-import { baseURL } from "../../utils/databaseURL";
+import { authHeader, baseURL } from "../../utils/databaseURL";
 import { PropsMultiplayerPages } from "../../utils/multiplayer-interfaces";
 
 export function JoinGroup({
   states,
   setMultiplayerPage,
 }: PropsMultiplayerPages): JSX.Element {
-  const { user, password } = states;
+  const { token } = states;
   const [groupName, setGroupName] = useState<string>("");
   const [groupPasscode, setGroupPasscode] = useState<string>("");
   const handleJoinButton = async () => {
     try {
-      await axios.post(baseURL + "groups/join/" + groupName, {
-        user: user,
-        userPassword: password,
-        groupPasscode: groupPasscode,
-      });
+      await axios.post(
+        baseURL + "groups/join/" + groupName,
+        { groupPasscode: groupPasscode },
+        authHeader(token)
+      );
       alert(`You have successfully joined ${groupName}`);
       setMultiplayerPage("all groups");
     } catch (err) {
