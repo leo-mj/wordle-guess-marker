@@ -15,7 +15,9 @@ function App(): JSX.Element {
   const [selectedPage, setSelectedPage] = useState<string>("main menu");
   const [user, setUser] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [token, setToken] = useState<string>("");
   const [loggedIn, setLoggedIn] = useState<boolean>(false);
+  const [serverReady, setServerReady] = useState<boolean>(false);
   const states: StateVariables = {
     selectedPage: selectedPage,
     setSelectedPage: setSelectedPage,
@@ -23,15 +25,38 @@ function App(): JSX.Element {
     setUser: setUser,
     password: password,
     setPassword: setPassword,
+    token: token,
+    setToken: setToken,
     loggedIn: loggedIn,
     setLoggedIn: setLoggedIn,
   };
   useEffect(() => {
-    axios.get(baseURL);
-    console.log("Connecting to server");
+    // the backend sleeps when idle: keep asking until it and its database answer,
+    // so it is awake by the time the user logs in
+    let cancelled = false;
+    const wakeServer = async () => {
+      while (!cancelled) {
+        try {
+          await axios.get(baseURL + "health");
+          setServerReady(true);
+          return;
+        } catch (error) {
+          await new Promise((resolve) => setTimeout(resolve, 3000));
+        }
+      }
+    };
+    wakeServer();
+    return () => {
+      cancelled = true;
+    };
   }, []);
   return (
     <>
+      {!serverReady && (
+        <div className="server-status">
+          Waking up the server, this can take up to a minute...
+        </div>
+      )}
       <MenuButtons states={states} />
       {selectedPage === "play" && <PlayWordle states={states} />}
       {selectedPage === "login" && <Login states={states} />}

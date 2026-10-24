@@ -5,16 +5,17 @@ import { GuessInterface } from "../components/play/GuessInterface";
 import { PropsMainPages } from "../utils/menu-interfaces";
 import { SharedResult } from "../utils/game-interfaces";
 import axios from "axios";
-import { baseURL } from "../utils/databaseURL";
+import { authHeader, baseURL } from "../utils/databaseURL";
 
 export function PlayWordle({ states }: PropsMainPages): JSX.Element {
   const {
     // selectedPage,
     // setSelectedPage,
-    user,
+    // user,
     // setUser,
-    password,
+    // password,
     // setPassword,
+    token,
     loggedIn,
     // setLoggedIn,
   } = states;
@@ -28,14 +29,17 @@ export function PlayWordle({ states }: PropsMainPages): JSX.Element {
   const [sharedResult, setSharedResult] = useState<SharedResult | null>(null);
   useEffect(() => {
     if (loggedIn && solvedStatus !== "solving" && sharedResult) {
-      axios.post(baseURL + `results/${user}/` + todaysDate, {
-        password: password,
-        guesses: sharedResult.guesses,
-        solvedStatus: solvedStatus,
-        emojis: `${sharedResult.emojis}`,
-      });
+      axios.post(
+        baseURL + "results/" + todaysDate,
+        {
+          guesses: sharedResult.guesses,
+          solvedStatus: solvedStatus,
+          emojis: `${sharedResult.emojis}`,
+        },
+        authHeader(token)
+      );
     }
-  }, [loggedIn, user, password, todaysDate, solvedStatus, sharedResult]);
+  }, [loggedIn, token, todaysDate, solvedStatus, sharedResult]);
 
   return (
     <>

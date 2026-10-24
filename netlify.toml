@@ -1,0 +1,5 @@
+[build.environment]
+  # Netlify pins the Node version from a site's first build; set it here so builds use a supported release
+  NODE_VERSION = "24"
+  # react-scripts 4 builds with webpack 4, whose MD4 hashing needs OpenSSL's legacy provider on Node 17+
+  NODE_OPTIONS = "--openssl-legacy-provider"
